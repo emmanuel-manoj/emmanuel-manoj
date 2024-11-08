@@ -1,0 +1,12 @@
+declare @text varchar(255)
+
+-- Edit this variable and replace with text to find
+set @text = 'indiawrim'
+
+set @text = '%' + @text + '%'
+select distinct o.name,
+       o.type_desc
+  from sys.all_objects o inner join sys.syscomments c on o.[object_id] = c.id
+ where c.text like @text
+   and Is_MS_Shipped = 0
+order by o.type_desc, o.Name
